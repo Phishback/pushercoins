@@ -110,4 +110,87 @@ class History extends Component {
     this.getThreeDayPrice();
     this.getFourDayPrice();
   }
+
+  render() {
+    return (
+      <div className="history--section container">
+        <h2>History (Past 5 days)</h2>
+        <div className="history--section__box">
+          <div className="history--section__box__inner">
+            <h4>{this.state.todayprice.date}</h4>
+            <div className="columns">
+              <div className="column">
+                <p>1 BTC = ${this.state.todayprice.btc}</p>
+              </div>
+              <div className="column">
+                <p> 1 ETH = ${this.state.todayprice.eth}</p>
+              </div>
+              <div className="column">
+                <p> 1 LTC = ${this.state.todayprice.ltc}</p>
+              </div>
+            </div>
+          </div>
+          <div className="history--section__box__inner">
+            <h4>{this.state.yesterdayprice.date}</h4>
+            <div className="columns">
+              <div className="column">
+                <p>1 BTC = ${this.state.yesterdayprice.btc}</p>
+              </div>
+              <div className="column">
+                <p> 1 ETH = ${this.state.yesterdayprice.eth}</p>
+              </div>
+              <div className="column">
+                <p> 1 LTC = ${this.state.yesterdayprice.ltc}</p>
+              </div>
+            </div>
+          </div>
+          <div className="history--section__box__inner">
+            <h4>{this.state.twodayprice.date}</h4>
+            <div className="columns">
+              <div className="column">
+                <p>1 BTC = ${this.state.twodayprice.btc}</p>
+              </div>
+              <div className="column">
+                <p> 1 ETH = ${this.state.twodayprice.eth}</p>
+              </div>
+              <div className="column">
+                <p> 1 LTC = ${this.state.twodayprice.ltc}</p>
+              </div>
+            </div>
+          </div>
+          <div className="history--section__box__inner">
+            <h4>{this.state.threedayprice.date}</h4>
+            <div className="columns">
+              <div className="column">
+                <p>1 BTC = ${this.state.threedayprice.btc}</p>
+              </div>
+              <div className="column">
+                <p> 1 ETH = ${this.state.threedayprice.eth}</p>
+              </div>
+              <div className="column">
+                <p> 1 LTC = ${this.state.threedayprice.ltc}</p>
+              </div>
+            </div>
+          </div>
+          <div className="history--section__box__inner">
+            <h4>{this.state.fourdayprice.date}</h4>
+            <div className="columns">
+              <div className="column">
+                <p>1 BTC = ${this.state.fourdayprice.btc}</p>
+              </div>
+              <div className="column">
+                <p> 1 ETH = ${this.state.fourdayprice.eth}</p>
+              </div>
+              <div className="column">
+                <p> 1 LTC = ${this.state.fourdayprice.ltc}</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    )
+  }
 }
+
+export default History;
+
