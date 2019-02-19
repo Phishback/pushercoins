@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import Pusher from 'pusher-js';
 import './Today.css';
 import axios from 'axios';
 
@@ -12,6 +13,37 @@ class Today extends Component {
       ethprice: ''
     };
   }
+
+  sendPricePusher (data) {
+    axios.post('/prices/new', {
+      prices: data
+    })
+      .then(res => {
+        console.log(res);
+      })
+      .catch(err => {
+        console.log(err);
+      })
+  }
+
+  componentDidMount () {
+    setInterval(() => {
+      axios.get('https://min-api.cryptocompare.com/data/pricemulti?fsyms=BTC,ETH,LTC&tsyms=USD')
+        .then(res => {
+          this.sendPricePusher(res.data);
+        })
+        .catch(err => {
+          console.log(err);
+        })
+    }, 10000);
+
+    this.prices.bind('prices', price => {
+      this.setState({ btcprice: price.prices.BTC.USD });
+      this.setState({ ethprice: price.prices.ETH.USD });
+      this.setState({ ltcprice: price.prices.LTC.USD });
+    })
+  }
+
   componentWillMount () {
     axios.get('https://min-api.cryptocompare.com/data/pricemulti?fsyms=BTC,ETH,LTC&tsyms=USD')
       .then(response => {
@@ -22,6 +54,11 @@ class Today extends Component {
       .catch(error => {
         console.log(error)
       })
+      this.pusher = new Pusher('580c93dd2287d2c7fcd5', {
+        cluster: 'us2',
+        encrypted: true
+      });
+      this.prices = this.pusher.subscribe('coin-pusher');
   }
 
   render() {
