@@ -17,6 +17,17 @@ class History extends Component {
     this.getETHPrices = this.getETHPrices.bind(this);
     this.getLTCPrices = this.getLTCPrices.bind(this);
   }
+
+  componentDidMount () {
+    if (!navigator.onLine) {
+      this.setState({ todayprice: JSON.parse(localStorage.getItem('todayprice')) });
+      this.setState({ yesterdayprice: JSON.parse(localStorage.getItem('yesterdayprice')) });
+      this.setState({ twodayprice: JSON.parse(localStorage.getItem('twodayprice')) });
+      this.setState({ threedayprice: JSON.parse(localStorage.getItem('threedayprice')) });
+      this.setState({ fourdayprice: JSON.parse(localStorage.getItem('fourdayprice')) });
+    }
+  }
+
   getETHPrices (date) {
     return axios.get('https://min-api.cryptocompare.com/data/pricehistorical?fsym=ETH&tsyms=USD&ts=' + date);
   }
@@ -41,7 +52,12 @@ class History extends Component {
           ltc: ltc.data.LTC.USD
         }
         this.setState({ todayprice: f });
+
+        localStorage.setItem('todayprice', JSON.stringify(f));
+        this.setState({ todayprice: f });
       }))
+
+
   }
 
   getYesterdayPrice () {
@@ -54,6 +70,9 @@ class History extends Component {
           btc: btc.data.BTC.USD,
           ltc: ltc.data.LTC.USD
         }
+        this.setState({ yesterdayprice: f });
+
+        localStorage.setItem('yesterdayprice', JSON.stringify(f));
         this.setState({ yesterdayprice: f });
       }));
   }
@@ -70,6 +89,9 @@ class History extends Component {
           ltc: ltc.data.LTC.USD
         }
         this.setState({ twodayprice: f });
+
+        localStorage.setItem('twodayprice', JSON.stringify(f));
+        this.setState({ twodayprice: f });
       }));
   }
 
@@ -85,6 +107,9 @@ class History extends Component {
           ltc: ltc.data.LTC.USD
         }
         this.setState({ threedayprice: f });
+
+        localStorage.setItem('threedayprice', JSON.stringify(f));
+        this.setState({ threedayprice: f });
       }));
   }
 
@@ -99,6 +124,9 @@ class History extends Component {
           btc: btc.data.BTC.USD,
           ltc: ltc.data.LTC.USD
         }
+        this.setState({ fourdayprice: f });
+
+        localStorage.setItem('fourdayprice', JSON.stringify(f));
         this.setState({ fourdayprice: f });
       }));
   }
