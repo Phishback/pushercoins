@@ -13,7 +13,8 @@ const pusher = new Pusher({
 });
 
 app.use(bodyParser.json())
-app.user(bodyParser.urlencoded({ extended: false }))
+app.use(bodyParser.urlencoded({ extended: false }))
+app.use(express.static(path.join(__dirname)));
 
 app.use((req, res, next) => {
   res.setHeader('Access-Control-Allow-Origin', '*');
@@ -25,7 +26,7 @@ app.use((req, res, next) => {
 
 app.set('port', (5000));
 app.get('/', (req, res) => {
-  res.send('Welcome');
+  res.send('Welcome')
 });
 
 app.post('/prices/new', (req,res) => {

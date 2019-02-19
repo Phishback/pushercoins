@@ -38,7 +38,7 @@ class Today extends Component {
           this.sendPricePusher(res.data);
         })
         .catch(err => {
-          console.log(err);
+          console.error(err);
         })
     }, 10000);
 
